@@ -1,0 +1,30 @@
+install.packages("LncPath")
+install.packages("samr")
+Installation
+#impute包安装命令
+To install this package, start R and enter:
+## try http:// if https:// URLs are not supported
+source("https://bioconductor.org/biocLite.R")
+biocLite("impute")
+
+library(impute)
+library(samr)
+library(LncPath)
+#没出结果
+lncPath(c(ENSG00000232956), Network, Weighted = TRUE, PathwayDataSet = "KEGG", 
+        minPathSize = 15, maxPathSize = 500, nperm = 1000)
+#以下是example的步骤
+SigLncs <- getExampleData("SigLncs")
+head(SigLncs)
+
+ExampleNet <- getExampleData("ExampleNet")
+head(ExampleNet)
+
+##run lncPath
+Result <- lncPath(SigLncs, ExampleNet,  Weighted = TRUE, PathwayDataSet = "KEGG", nperm = 100,
+                  minPathSize = 0, maxPathSize = 500)
+
+## Print to table
+Table <- lncPath2Table(Result)
+head(Table)
+
